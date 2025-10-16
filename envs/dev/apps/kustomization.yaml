@@ -1,4 +1,4 @@
 resources:
-  - ../../apps/front
-  - ../../apps/back
-  - ../../apps/db
+  - ../../../apps/front
+  - ../../../apps/back
+  - ../../../apps/db
