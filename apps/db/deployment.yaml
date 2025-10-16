@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: db
-        image: bitnami/postgresql:16      # 👈 tag existant
+        image: docker.io/bitnami/postgresql:latest   # 👈 tag dispo
         env:
         - name: POSTGRESQL_USERNAME
           value: appuser
@@ -20,7 +20,6 @@ spec:
           value: apppass
         - name: POSTGRESQL_DATABASE
           value: appdb
-        # (optionnel pour démo) Autoriser un mot de passe simple :
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
         ports:

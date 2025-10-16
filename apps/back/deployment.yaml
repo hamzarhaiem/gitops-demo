@@ -13,9 +13,10 @@ spec:
       containers:
       - name: back
         image: ghcr.io/traefik/whoami:latest
-        args: ["--port=8080"]           # 👈 écoute sur 8080 (non-root OK)
+        args: ["--port=8080"]
         ports:
         - containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
           runAsNonRoot: true
+          runAsUser: 1001        # 👈 satisfait runAsNonRoot même si l'image déclare USER root
