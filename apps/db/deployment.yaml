@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: db }
+  template:
+    metadata:
+      labels: { app: db }
+    spec:
+      containers:
+      - name: db
+        image: bitnami/postgresql:14
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: appuser
+        - name: POSTGRESQL_PASSWORD
+          value: apppass
+        - name: POSTGRESQL_DATABASE
+          value: appdb
+        ports:
+        - containerPort: 5432
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: data
+          mountPath: /bitnami/postgresql
+      volumes:
+      - name: data
+        emptyDir: {}

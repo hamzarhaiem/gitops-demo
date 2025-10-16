@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: back }
+  template:
+    metadata:
+      labels: { app: back }
+    spec:
+      containers:
+      - name: back
+        image: ghcr.io/traefik/whoami:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true

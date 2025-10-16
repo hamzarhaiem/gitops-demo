@@ -1,0 +1,4 @@
+resources:
+  - ../../apps/front
+  - ../../apps/back
+  - ../../apps/db

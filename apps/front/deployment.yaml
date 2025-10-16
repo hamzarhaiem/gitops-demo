@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: front }
+  template:
+    metadata:
+      labels: { app: front }
+    spec:
+      containers:
+      - name: front
+        # Image unprivileged qui écoute sur 8080
+        image: nginxinc/nginx-unprivileged:stable
+        ports:
+        - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
