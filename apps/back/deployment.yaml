@@ -13,8 +13,9 @@ spec:
       containers:
       - name: back
         image: ghcr.io/traefik/whoami:latest
+        args: ["--port=8080"]           # 👈 écoute sur 8080 (non-root OK)
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
+          runAsNonRoot: true

@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: db
-        image: bitnami/postgresql:14
+        image: bitnami/postgresql:16      # 👈 tag existant
         env:
         - name: POSTGRESQL_USERNAME
           value: appuser
@@ -20,10 +20,14 @@ spec:
           value: apppass
         - name: POSTGRESQL_DATABASE
           value: appdb
+        # (optionnel pour démo) Autoriser un mot de passe simple :
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
         ports:
         - containerPort: 5432
         securityContext:
           allowPrivilegeEscalation: false
+          runAsNonRoot: true
         volumeMounts:
         - name: data
           mountPath: /bitnami/postgresql

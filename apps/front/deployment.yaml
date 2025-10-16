@@ -12,10 +12,20 @@ spec:
     spec:
       containers:
       - name: front
-        # Image unprivileged qui écoute sur 8080
         image: nginxinc/nginx-unprivileged:stable
         ports:
         - containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
+          runAsNonRoot: true
           readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: nginx-cache
+          mountPath: /var/cache/nginx     # 👈 writable
+        - name: nginx-run
+          mountPath: /var/run             # 👈 writable
+      volumes:
+      - name: nginx-cache
+        emptyDir: {}
+      - name: nginx-run
+        emptyDir: {}
